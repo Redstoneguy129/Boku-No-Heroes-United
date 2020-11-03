@@ -1,16 +1,13 @@
 package me.redstoneguy129.gillygogs.bokunoheroesunited.client;
 
 import me.redstoneguy129.gillygogs.bokunoheroesunited.BokuNoHeroesUnited;
-import me.redstoneguy129.gillygogs.bokunoheroesunited.common.capabilities.PlayerCapabilityProvider;
 import me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.BNHUNetworking;
 import me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.SQuirkActivate;
 import me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.SQuirkKeyUsage;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import org.lwjgl.glfw.GLFW;

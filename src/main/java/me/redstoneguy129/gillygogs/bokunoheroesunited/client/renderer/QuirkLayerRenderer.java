@@ -2,7 +2,6 @@ package me.redstoneguy129.gillygogs.bokunoheroesunited.client.renderer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import me.redstoneguy129.gillygogs.bokunoheroesunited.common.capabilities.PlayerCapabilityProvider;
-import me.redstoneguy129.gillygogs.bokunoheroesunited.common.quirk.quirks.DarkShadowQuirk;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
