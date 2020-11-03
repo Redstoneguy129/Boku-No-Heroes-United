@@ -1,6 +1,5 @@
 package me.redstoneguy129.gillygogs.bokunoheroesunited.common.quirk;
 
-import me.redstoneguy129.gillygogs.bokunoheroesunited.client.BNHUKeyBinds;
 import me.redstoneguy129.gillygogs.bokunoheroesunited.client.renderer.QuirkLayerRenderer;
 import me.redstoneguy129.gillygogs.bokunoheroesunited.common.capabilities.PlayerCapabilityProvider;
 import me.redstoneguy129.gillygogs.bokunoheroesunited.common.events.BNHUQuirkKeyEvent;
@@ -54,6 +53,12 @@ public class QuirkEvents {
 
     @SubscribeEvent
     public void render(RenderPlayerEvent.Pre event) {
+        event.getPlayer().getCapability(PlayerCapabilityProvider.CAPABILITY).ifPresent(playerCapability -> {
+            if(playerCapability.getQuirk() != null && playerCapability.getQuirk().shouldRenderModel()) {
+                event.setCanceled(true);
+                playerCapability.getQuirk().renderModel(event);
+            }
+        });
         if(playerRendererList.contains(event.getRenderer())) return;
         event.getRenderer().addLayer(new QuirkLayerRenderer(event.getRenderer()));
         playerRendererList.add(event.getRenderer());

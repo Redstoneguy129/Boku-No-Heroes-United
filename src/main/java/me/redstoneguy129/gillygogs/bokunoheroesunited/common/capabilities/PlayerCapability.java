@@ -1,10 +1,10 @@
 package me.redstoneguy129.gillygogs.bokunoheroesunited.common.capabilities;
 
-import me.redstoneguy129.gillygogs.bokunoheroesunited.common.quirk.IQuirk;
+import me.redstoneguy129.gillygogs.bokunoheroesunited.common.quirk.Quirk;
 
 public class PlayerCapability implements IPlayerCapability {
     private boolean loggedIn = false;
-    private IQuirk quirk = null;
+    private Quirk quirk = null;
 
     @Override
     public void setLoggedInBefore(boolean loggedIn) {
@@ -17,12 +17,12 @@ public class PlayerCapability implements IPlayerCapability {
     }
 
     @Override
-    public void setQuirk(IQuirk quirk) {
+    public void setQuirk(Quirk quirk) {
         this.quirk = quirk;
     }
 
     @Override
-    public IQuirk getQuirk() {
+    public Quirk getQuirk() {
         return this.quirk;
     }
 

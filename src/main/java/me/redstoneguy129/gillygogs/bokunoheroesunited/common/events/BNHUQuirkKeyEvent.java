@@ -5,10 +5,6 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.LogicalSide;
-import org.spongepowered.asm.mixin.MixinEnvironment;
-
-import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class BNHUQuirkKeyEvent extends Event {
     public static enum Keys {

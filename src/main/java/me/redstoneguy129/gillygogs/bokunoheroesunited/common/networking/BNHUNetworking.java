@@ -18,7 +18,8 @@ public class BNHUNetworking {
         instance = NetworkRegistry.newSimpleChannel(new ResourceLocation(BokuNoHeroesUnited.MOD_ID, "networking"), () -> "1.0", s -> true, s -> true);
         instance.registerMessage(NextID(), CQuirkKeyUsage.class, CQuirkKeyUsage::toBytes, CQuirkKeyUsage::new, CQuirkKeyUsage::handle);
         instance.registerMessage(NextID(), SQuirkKeyUsage.class, SQuirkKeyUsage::toBytes, SQuirkKeyUsage::new, SQuirkKeyUsage::handle);
-
+        instance.registerMessage(NextID(), CQuirkActivate.class, CQuirkActivate::toBytes, CQuirkActivate::new, CQuirkActivate::handle);
+        instance.registerMessage(NextID(), SQuirkActivate.class, SQuirkActivate::toBytes, SQuirkActivate::new, SQuirkActivate::handle);
     }
 
 }
