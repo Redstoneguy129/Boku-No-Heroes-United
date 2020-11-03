@@ -7,7 +7,7 @@ version="${file.jarVersion}"
 displayName="Boku No Heroes United"
 authors=["Gillygogs", "Redstoneguy129"]
 description='''
-Gillygogs My Hero Academia Mod
+Gillygogs My Hero Academia Mod.
 '''
 
 [[dependencies.boku-no-heroes-united]]
