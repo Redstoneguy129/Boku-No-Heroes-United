@@ -1,9 +1,12 @@
-// Made with Blockbench 3.6.6
-// Exported for Minecraft version 1.15
-// Paste this class into your mod and generate all required imports
+package me.redstoneguy129.gillygogs.bokunoheroesunited.client.models;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.entity.Entity;
 
-public class Tokoyami extends EntityModel<Entity> {
+public class DarkShadowModel extends EntityModel<Entity> {
 	private final ModelRenderer bipedHead;
 	private final ModelRenderer bipedBody;
 	private final ModelRenderer bipedRightArm;
@@ -48,7 +51,7 @@ public class Tokoyami extends EntityModel<Entity> {
 	private final ModelRenderer bone23;
 	private final ModelRenderer bone24;
 
-	public Tokoyami() {
+	public DarkShadowModel() {
 		textureWidth = 128;
 		textureHeight = 128;
 
@@ -315,7 +318,6 @@ public class Tokoyami extends EntityModel<Entity> {
 
 	@Override
 	public void setRotationAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
-		//previously the render function, render code was moved to a method below
 	}
 
 	@Override

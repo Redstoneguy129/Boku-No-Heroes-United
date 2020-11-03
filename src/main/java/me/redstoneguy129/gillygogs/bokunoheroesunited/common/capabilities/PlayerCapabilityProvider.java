@@ -1,4 +1,4 @@
-package me.redstoneguy129.gillygogs.bokunoheroesunited.common.capability;
+package me.redstoneguy129.gillygogs.bokunoheroesunited.common.capabilities;
 
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
@@ -9,11 +9,11 @@ import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nonnull;
 
-public class QuirkProvider implements ICapabilitySerializable<INBT> {
+public class PlayerCapabilityProvider implements ICapabilitySerializable<INBT> {
 
-    @CapabilityInject(IQuirkCapability.class)
-    public static Capability<IQuirkCapability> CAPABILITY = null;
-    private final LazyOptional<IQuirkCapability> instance = LazyOptional.of(CAPABILITY::getDefaultInstance);
+    @CapabilityInject(IPlayerCapability.class)
+    public static Capability<IPlayerCapability> CAPABILITY = null;
+    private final LazyOptional<IPlayerCapability> instance = LazyOptional.of(CAPABILITY::getDefaultInstance);
 
     @Nonnull
     @Override

@@ -1,11 +1,13 @@
 package me.redstoneguy129.gillygogs.bokunoheroesunited;
 
-import me.redstoneguy129.gillygogs.bokunoheroesunited.api.annotation.Quirk;
-import me.redstoneguy129.gillygogs.bokunoheroesunited.common.capability.IQuirkCapability;
-import me.redstoneguy129.gillygogs.bokunoheroesunited.common.capability.QuirkCapabilityCapability;
-import me.redstoneguy129.gillygogs.bokunoheroesunited.common.capability.QuirkStorage;
-import me.redstoneguy129.gillygogs.bokunoheroesunited.common.events.CapabilityEvent;
-import me.redstoneguy129.gillygogs.bokunoheroesunited.common.registry.quirk.Quirks;
+import me.redstoneguy129.gillygogs.bokunoheroesunited.client.BNHUKeyBinds;
+import me.redstoneguy129.gillygogs.bokunoheroesunited.common.capabilities.CapabilityEvents;
+import me.redstoneguy129.gillygogs.bokunoheroesunited.common.capabilities.IPlayerCapability;
+import me.redstoneguy129.gillygogs.bokunoheroesunited.common.capabilities.PlayerCapability;
+import me.redstoneguy129.gillygogs.bokunoheroesunited.common.capabilities.PlayerCapabilityStorage;
+import me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.BNHUNetworking;
+import me.redstoneguy129.gillygogs.bokunoheroesunited.common.quirk.QuirkEvents;
+import me.redstoneguy129.gillygogs.bokunoheroesunited.common.quirk.QuirkRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
@@ -17,12 +19,15 @@ public class BokuNoHeroesUnited {
     public static final String MOD_ID = "boku-no-heroes-united";
 
     public BokuNoHeroesUnited() {
+        QuirkRegistry.registerQuirks();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(Quirks::registerQuirks);
-        MinecraftForge.EVENT_BUS.register(new CapabilityEvent());
+        MinecraftForge.EVENT_BUS.register(new QuirkEvents());
+        MinecraftForge.EVENT_BUS.register(new BNHUKeyBinds());
+        MinecraftForge.EVENT_BUS.register(new CapabilityEvents());
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        CapabilityManager.INSTANCE.register(IQuirkCapability.class, new QuirkStorage(), QuirkCapabilityCapability::new);
+        CapabilityManager.INSTANCE.register(IPlayerCapability.class, new PlayerCapabilityStorage(), PlayerCapability::new);
+        BNHUNetworking.registerMessages();
     }
 }
