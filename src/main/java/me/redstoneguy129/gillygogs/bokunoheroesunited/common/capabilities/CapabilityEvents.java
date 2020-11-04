@@ -20,7 +20,7 @@ public class CapabilityEvents {
     @SubscribeEvent
     public void onClone(PlayerEvent.Clone event) {
         event.getOriginal().getCapability(PlayerCapabilityProvider.CAPABILITY).ifPresent((oldPlayerCapability -> {
-            ((IPlayerCapability) event.getPlayer().getCapability(PlayerCapabilityProvider.CAPABILITY)).copy(oldPlayerCapability);
+            event.getPlayer().getCapability(PlayerCapabilityProvider.CAPABILITY).orElseThrow(null).copy(oldPlayerCapability);
         }));
     }
 
