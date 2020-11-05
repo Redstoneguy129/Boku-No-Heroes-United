@@ -9,20 +9,24 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Mod.EventBusSubscriber(modid = BokuNoHeroesUnited.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class QuirkRegistry {
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
-    public static Map<Integer, Quirk> quirkMap = new HashMap<>();
+    public static final Map<Integer, Quirk> quirkMap = new HashMap<>();
+    public static final Map<String, Quirk> quirkStringMap = new HashMap<>();
 
     public static void registerQuirks() {
-        quirkMap.put(0, new QuirklessQuirk());
-        quirkMap.put(1, new DarkShadowQuirk());
+        List<Quirk> quirks = new ArrayList<>();
+        quirks.add(new QuirklessQuirk());
+        quirks.add(new DarkShadowQuirk());
+        for(int i = 0; i < quirks.size(); i++) {
+            quirkMap.put(i, quirks.get(i));
+            quirkStringMap.put(quirks.get(i).getName(), quirks.get(i));
+        }
     }
 
     public static int getQuirkID(Quirk quirk) {

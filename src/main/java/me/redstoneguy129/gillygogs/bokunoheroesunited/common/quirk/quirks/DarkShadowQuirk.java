@@ -8,59 +8,34 @@ import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.RenderPlayerEvent;
-import net.minecraftforge.fml.LogicalSide;
+
+import java.util.Map;
 
 public class DarkShadowQuirk extends Quirk {
-    private boolean active = false;
-
-    private double defaultMaxHealth;
-    private double defaultAttackDamage;
 
     @Override
-    public void onActivated(PlayerEntity playerEntity) {
-        defaultAttackDamage = playerEntity.getAttributes().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
-        defaultMaxHealth = playerEntity.getAttributes().getAttributeInstance(SharedMonsterAttributes.MAX_HEALTH).getBaseValue();
-        this.active = true;
+    public String getName() {
+        return "darkshadow";
     }
 
     @Override
-    public void onDeactivated(PlayerEntity playerEntity) {
-        this.active = false;
-        playerEntity.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(defaultMaxHealth);
-        playerEntity.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(defaultAttackDamage);
-    }
-
-    @Override
-    public void onUpdate(PlayerEntity playerEntity) {
-        if(!active) return;
+    public Map<IAttribute, Double> setAttributes(PlayerEntity playerEntity, Map<IAttribute, Double> map) {
         if(playerEntity.world.isNightTime()) {
-            playerEntity.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40D);
-            playerEntity.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10D);
+            map.put(SharedMonsterAttributes.ATTACK_DAMAGE, 5D);
         } else {
-            playerEntity.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25D);
-            playerEntity.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5D);
+            map.put(SharedMonsterAttributes.KNOCKBACK_RESISTANCE, 5D);
+            map.put(SharedMonsterAttributes.MAX_HEALTH, 10D);
         }
+        return super.setAttributes(playerEntity, map);
     }
 
     @Override
     public boolean shouldRenderLayer() {
-        return this.active;
-    }
-
-    @Override
-    public void renderModel(RenderPlayerEvent.Pre event) {
-
-    }
-
-    @Override
-    public boolean shouldRenderModel() {
-        return false;
+        return this.activated;
     }
 
     @Override

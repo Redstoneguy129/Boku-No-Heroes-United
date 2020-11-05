@@ -19,9 +19,9 @@ public class CapabilityEvents {
 
     @SubscribeEvent
     public void onClone(PlayerEvent.Clone event) {
-        event.getOriginal().getCapability(PlayerCapabilityProvider.CAPABILITY).ifPresent((oldPlayerCapability -> {
-            event.getPlayer().getCapability(PlayerCapabilityProvider.CAPABILITY).orElseThrow(null).copy(oldPlayerCapability);
-        }));
+        IPlayerCapability Old = event.getOriginal().getCapability(PlayerCapabilityProvider.CAPABILITY).orElseThrow(() -> new IllegalArgumentException("Quirk must not be empty"));
+        IPlayerCapability New = event.getPlayer().getCapability(PlayerCapabilityProvider.CAPABILITY).orElseThrow(() -> new IllegalArgumentException("Quirk must not be empty"));
+        New.copy(Old);
     }
 
 }

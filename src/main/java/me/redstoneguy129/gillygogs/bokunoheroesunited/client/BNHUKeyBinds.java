@@ -2,8 +2,8 @@ package me.redstoneguy129.gillygogs.bokunoheroesunited.client;
 
 import me.redstoneguy129.gillygogs.bokunoheroesunited.BokuNoHeroesUnited;
 import me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.BNHUNetworking;
-import me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.SQuirkActivate;
-import me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.SQuirkKeyUsage;
+import me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.server.SQuirkKeyUsage;
+import me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.server.SQuirkToggle;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -23,8 +23,7 @@ public class BNHUKeyBinds {
     public static final KeyBinding KEY_4 = new KeyBinding(BokuNoHeroesUnited.MOD_ID+".key.4", GLFW.GLFW_KEY_V, CATEGORY);
     public static final KeyBinding KEY_5 = new KeyBinding(BokuNoHeroesUnited.MOD_ID+".key.5", GLFW.GLFW_KEY_B, CATEGORY);
 
-    public static final KeyBinding ACTIVATE = new KeyBinding(BokuNoHeroesUnited.MOD_ID+".key.activate", GLFW.GLFW_KEY_X, CATEGORY);
-    public static final KeyBinding DEACTIVATE = new KeyBinding(BokuNoHeroesUnited.MOD_ID+".key.deactivate", GLFW.GLFW_KEY_C, CATEGORY);
+    public static final KeyBinding TOGGLE_QUIRK = new KeyBinding(BokuNoHeroesUnited.MOD_ID+".key.toggle_quirk", GLFW.GLFW_KEY_X, CATEGORY);
 
     static {
         ClientRegistry.registerKeyBinding(KEY_1);
@@ -32,8 +31,7 @@ public class BNHUKeyBinds {
         ClientRegistry.registerKeyBinding(KEY_3);
         ClientRegistry.registerKeyBinding(KEY_4);
         ClientRegistry.registerKeyBinding(KEY_5);
-        ClientRegistry.registerKeyBinding(ACTIVATE);
-        ClientRegistry.registerKeyBinding(DEACTIVATE);
+        ClientRegistry.registerKeyBinding(TOGGLE_QUIRK);
     }
 
     @SubscribeEvent
@@ -48,10 +46,8 @@ public class BNHUKeyBinds {
             BNHUNetworking.instance.sendToServer(new SQuirkKeyUsage(KEY_4.getKey().getKeyCode()));
         } else if(KEY_5.isPressed()) {
             BNHUNetworking.instance.sendToServer(new SQuirkKeyUsage(KEY_5.getKey().getKeyCode()));
-        } else if(ACTIVATE.isPressed()) {
-            BNHUNetworking.instance.sendToServer(new SQuirkActivate(true));
-        } else if(DEACTIVATE.isPressed()) {
-            BNHUNetworking.instance.sendToServer(new SQuirkActivate(false));
+        } else if(TOGGLE_QUIRK.isPressed()) {
+            BNHUNetworking.instance.sendToServer(new SQuirkToggle());
         }
     }
 
