@@ -1,9 +1,8 @@
-package me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.server;
+package me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking;
 
 import io.netty.buffer.ByteBuf;
+import me.redstoneguy129.gillygogs.bokunoheroesunited.client.BNHUKeyBinds;
 import me.redstoneguy129.gillygogs.bokunoheroesunited.common.events.BNHUQuirkKeyEvent;
-import me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.BNHUNetworking;
-import me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.client.CQuirkKeyUsage;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.network.NetworkDirection;
@@ -11,20 +10,20 @@ import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class SQuirkKeyUsage {
+public class KeyUsagePacket {
 
-    public int key;
+    public BNHUKeyBinds.Keys key;
 
-    public SQuirkKeyUsage(int key) {
+    public KeyUsagePacket(BNHUKeyBinds.Keys key) {
         this.key = key;
     }
 
-    public SQuirkKeyUsage(ByteBuf buf) {
-        this.key = buf.readInt();
+    public KeyUsagePacket(ByteBuf buf) {
+        this.key = BNHUKeyBinds.Keys.getKey(buf.readInt());
     }
 
     public void toBytes(ByteBuf buf) {
-        buf.writeInt(this.key);
+        buf.writeInt(BNHUKeyBinds.Keys.getKey(this.key));
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
@@ -32,7 +31,8 @@ public class SQuirkKeyUsage {
             ServerPlayerEntity player = ctx.get().getSender();
             if (player != null) {
                 MinecraftForge.EVENT_BUS.post(new BNHUQuirkKeyEvent(player, this.key));
-                BNHUNetworking.instance.sendTo(new CQuirkKeyUsage(this.key), player.connection.getNetworkManager(), NetworkDirection.PLAY_TO_CLIENT);
+                if(ctx.get().getDirection().getReceptionSide().isServer())
+                    BNHUNetworking.instance.sendTo(new KeyUsagePacket(this.key), player.connection.getNetworkManager(), NetworkDirection.PLAY_TO_CLIENT);
             }
         });
         ctx.get().setPacketHandled(true);

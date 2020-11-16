@@ -2,8 +2,8 @@ package me.redstoneguy129.gillygogs.bokunoheroesunited.client;
 
 import me.redstoneguy129.gillygogs.bokunoheroesunited.BokuNoHeroesUnited;
 import me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.BNHUNetworking;
-import me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.server.SQuirkKeyUsage;
-import me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.server.SQuirkToggle;
+import me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.KeyUsagePacket;
+import me.redstoneguy129.gillygogs.bokunoheroesunited.common.networking.QuirkTogglePacket;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -37,17 +37,38 @@ public class BNHUKeyBinds {
     @SubscribeEvent
     public void keyInput(InputEvent.KeyInputEvent event) {
         if(KEY_1.isPressed()) {
-            BNHUNetworking.instance.sendToServer(new SQuirkKeyUsage(KEY_1.getKey().getKeyCode()));
+            BNHUNetworking.instance.sendToServer(new KeyUsagePacket(Keys.FIRST));
         } else if(KEY_2.isPressed()) {
-            BNHUNetworking.instance.sendToServer(new SQuirkKeyUsage(KEY_2.getKey().getKeyCode()));
+            BNHUNetworking.instance.sendToServer(new KeyUsagePacket(Keys.SECOND));
         } else if(KEY_3.isPressed()) {
-            BNHUNetworking.instance.sendToServer(new SQuirkKeyUsage(KEY_3.getKey().getKeyCode()));
+            BNHUNetworking.instance.sendToServer(new KeyUsagePacket(Keys.THIRD));
         } else if(KEY_4.isPressed()) {
-            BNHUNetworking.instance.sendToServer(new SQuirkKeyUsage(KEY_4.getKey().getKeyCode()));
+            BNHUNetworking.instance.sendToServer(new KeyUsagePacket(Keys.FOURTH));
         } else if(KEY_5.isPressed()) {
-            BNHUNetworking.instance.sendToServer(new SQuirkKeyUsage(KEY_5.getKey().getKeyCode()));
+            BNHUNetworking.instance.sendToServer(new KeyUsagePacket(Keys.FIFTH));
         } else if(TOGGLE_QUIRK.isPressed()) {
-            BNHUNetworking.instance.sendToServer(new SQuirkToggle());
+            BNHUNetworking.instance.sendToServer(new QuirkTogglePacket());
+        }
+    }
+
+    public enum Keys {
+        FIRST,
+        SECOND,
+        THIRD,
+        FOURTH,
+        FIFTH;
+
+        public static Keys getKey(int key) {
+            return Keys.values()[key];
+        }
+
+        public static int getKey(Keys key) {
+            int i = 0;
+            for(Keys keys : Keys.values()) {
+                if(keys == key) return i;
+                i++;
+            }
+            return 0;
         }
     }
 

@@ -1,8 +1,10 @@
 package me.redstoneguy129.gillygogs.bokunoheroesunited.common.capabilities;
 
 import me.redstoneguy129.gillygogs.bokunoheroesunited.common.quirk.Quirk;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraftforge.common.util.INBTSerializable;
 
-public interface IPlayerCapability {
+public interface IPlayerCapability extends INBTSerializable<CompoundNBT> {
     void setLoggedInBefore(boolean loggedIn);
     boolean hasLoggedInBefore();
 

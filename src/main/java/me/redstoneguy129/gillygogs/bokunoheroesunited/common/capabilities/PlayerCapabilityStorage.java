@@ -1,6 +1,5 @@
 package me.redstoneguy129.gillygogs.bokunoheroesunited.common.capabilities;
 
-import me.redstoneguy129.gillygogs.bokunoheroesunited.common.quirk.QuirkRegistry;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
@@ -13,16 +12,11 @@ public class PlayerCapabilityStorage implements Capability.IStorage<IPlayerCapab
     @Nullable
     @Override
     public INBT writeNBT(Capability<IPlayerCapability> capability, IPlayerCapability instance, Direction side) {
-        CompoundNBT tag = new CompoundNBT();
-        tag.putBoolean("loggedIn", instance.hasLoggedInBefore());
-        tag.putInt("quirk", QuirkRegistry.getQuirkID(instance.getQuirk()));
-        return tag;
+        return instance.serializeNBT();
     }
 
     @Override
     public void readNBT(Capability<IPlayerCapability> capability, IPlayerCapability instance, Direction side, INBT nbt) {
-        CompoundNBT tag = (CompoundNBT) nbt;
-        instance.setLoggedInBefore(tag.getBoolean("loggedIn"));
-        instance.setQuirk(QuirkRegistry.quirkMap.get(tag.getInt("quirk")));
+        instance.deserializeNBT(nbt instanceof CompoundNBT ? (CompoundNBT) nbt : new CompoundNBT());
     }
 }
