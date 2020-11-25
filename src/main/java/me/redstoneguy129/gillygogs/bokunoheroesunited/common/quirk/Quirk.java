@@ -25,6 +25,15 @@ public class Quirk extends ForgeRegistryEntry<Quirk> {
     public static final IForgeRegistry<Quirk> QUIRK = new RegistryBuilder<Quirk>().setIDRange(0, 2048).setType(Quirk.class).setName(new ResourceLocation(BokuNoHeroesUnited.MOD_ID, "quirk")).create();
 
     public boolean activated = false;
+    public final QuirkType quirkType;
+
+    public Quirk(QuirkType quirkType) {
+        this.quirkType = quirkType;
+    }
+
+    public Quirk() {
+        this.quirkType = QuirkType.EMITTER;
+    }
 
     public void onActivated(PlayerEntity playerEntity) {}
 
