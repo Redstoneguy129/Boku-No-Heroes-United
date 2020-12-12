@@ -54,11 +54,6 @@ public class Quirk extends ForgeRegistryEntry<Quirk> {
     @OnlyIn(Dist.CLIENT)
     public void renderModel(RenderPlayerEvent.Pre event) {}
 
-    @OnlyIn(Dist.CLIENT)
-    public boolean shouldRenderModel() {
-        return false;
-    }
-
     public final void addAttribute(PlayerEntity entity, Attribute attribute, double value, AttributeModifier.Operation operation, UUID uuid) {
         addAttribute(entity, "bnhudefault", attribute, value, operation, uuid);
     }

@@ -57,7 +57,7 @@ public class QuirkEvents {
     @SubscribeEvent
     public void render(RenderPlayerEvent.Pre event) {
         event.getPlayer().getCapability(PlayerCapabilityProvider.CAPABILITY).ifPresent(playerCapability -> {
-            if(playerCapability.getQuirk() != null && playerCapability.getQuirk().shouldRenderModel()) {
+            if(playerCapability.getQuirk() != null) {
                 event.setCanceled(true);
                 playerCapability.getQuirk().renderModel(event);
             }
